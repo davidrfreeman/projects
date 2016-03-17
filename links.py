@@ -5,11 +5,34 @@
 import urllib
 from bs4 import *
 
-url = raw_input('Enter - ')
+url = raw_input('Enter: ')
+count = int(raw_input('Enter count: '))
+pos = int(raw_input('Enter position: ')) - 1
+
 html = urllib.urlopen(url).read()
 soup = BeautifulSoup(html, "html.parser")
 
+links = []
+
 # Retrieve all of the anchor tags
 tags = soup('a')
-for tag in tags:
-    print tag.get('href', None)
+
+print "Retrieving: ", url
+
+while True:
+	# exits once it has looped the number of times given to count
+	if count == 0: break
+	# loop fills list with all links on page
+	for tag in tags:
+		links.append(tag.get('href', None))
+	html = urllib.urlopen(links[pos]).read()
+	soup = BeautifulSoup(html, "html.parser")
+	print "Retrieving: ", links[pos]
+	# clears out list to be filled again by for loop
+	links = []
+	# removes 1 from count so that the loop will eventually end
+	count -= 1
+
+
+
+
