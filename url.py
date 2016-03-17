@@ -4,9 +4,12 @@ from bs4 import *
 url = raw_input('Enter - ')
 
 html = urllib.urlopen(url).read()
-soup = BeautifulSoup(html)
+soup = BeautifulSoup(html, "html.parser")
 
-tags = soup('a')
+nums = []
 
+tags = soup('span')
 for tag in tags:
-	print tag.get('href', None)
+   nums.append(int(tag.contents[0]))
+
+print sum(nums)
