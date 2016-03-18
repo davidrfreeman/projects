@@ -19,8 +19,7 @@ tags = soup('a')
 
 print "Retrieving: ", url
 
-while count > 0:
-	# exits once it has looped the number of times given to count
+for i in range(count):
 	# loop fills list with all links on page
 	for tag in tags:
 		links.append(tag.get('href', None))
@@ -28,6 +27,6 @@ while count > 0:
 	soup = BeautifulSoup(html, "html.parser")
 	print "Retrieving: ", links[pos]
 	# clears out list to be filled again by for loop
-	del links[:]
+	links = links[:]
 	# removes 1 from count so that the loop will eventually end
 	count -= 1
